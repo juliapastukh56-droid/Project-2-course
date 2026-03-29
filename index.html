@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Юлія Пастух - Резюме (CV)</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -80,5 +81,18 @@
         </tr>
     </table>
 
+    <script src="script.js"></script>
+    <div id="myModal" style="display:none; position:fixed; top:20%; left:30%; background:white; border:2px solid black; padding:20px; z-index:100;">
+    <form action="https://formspree.io/f/ВАШ_ЕНДПОЙНТ" method="POST">
+        <input type="text" name="name" placeholder="Ім'я" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="tel" name="phone" placeholder="Номер телефону"><br>
+        <textarea name="message" placeholder="Ваше повідомлення"></textarea><br>
+        <button type="submit">Відправити</button>
+    </form>
+</div>
+    <footer>
+    <div id="os-info"></div>
+</footer>
 </body>
 </html>
