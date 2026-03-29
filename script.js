@@ -1,35 +1,60 @@
-const browserInfo = navigator.userAgent;
-localStorage.setItem('browserInfo', browserInfo);
+console.log("JavaScript файл завантажився!"); 
 
-const footerDiv = document.getElementById('os-info');
-footerDiv.innerText = "Ваша система: " + localStorage.getItem('browserInfo');
-async function loadComments() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts/21/comments'); 
-    const comments = await response.json();
-    
-    const commentsSection = document.createElement('div');
-    commentsSection.innerHTML = "<h3>Відгуки роботодавців</h3>";
-    
-    comments.forEach(comment => {
-        const p = document.createElement('p');
-        p.innerHTML = `<strong>${comment.name}:</strong> ${comment.body}`;
-        commentsSection.appendChild(p);
-    });
-    
-    document.body.appendChild(commentsSection);
-}
-loadComments();
-setTimeout(() => {
-    document.getElementById('myModal').style.display = 'block';
-}, 60000); 
-function updateTheme() {
-    const hour = new Date().getHours();
-    if (hour >= 7 && hour < 21) {
-        document.body.style.backgroundColor = "white";
-        document.body.style.color = "black";
+
+const systemInfo = {
+    os: navigator.platform,
+    browser: navigator.userAgent,
+    time: new Date().toLocaleString()
+};
+localStorage.setItem('mySystemData', JSON.stringify(systemInfo));
+
+
+window.onload = function() {
+    console.log("Сторінка завантажена повністю");
+    const footerDiv = document.getElementById('os-info');
+    const data = JSON.parse(localStorage.getItem('mySystemData'));
+
+    if (footerDiv && data) {
+        footerDiv.innerHTML = `
+            <hr>
+            <p style="color: blue;"><strong>Інфо з localStorage:</strong><br>
+            Система: ${data.os}<br>
+            Браузер: ${data.browser}</p>
+        `;
+        console.log("Дані успішно виведені у футер");
     } else {
-        document.body.style.backgroundColor = "#2c3e50";
-        document.body.style.color = "white";
+        console.log("Помилка: не знайдено div з id 'os-info'");
+    }
+
+    
+    setTimeout(() => {
+        const modal = document.getElementById('myModal');
+        if (modal) {
+            modal.style.display = 'block';
+            console.log("Модальне вікно відкрито");
+        }
+    }, 60000); 
+};
+function autoThemeSwitcher() {
+    const currentHour = new Date().getHours(); // 
+    console.log("Поточна година:", currentHour);
+
+    
+    if (currentHour >= 7 && currentHour < 21) {
+        document.body.classList.remove('dark-theme');
+        console.log("Встановлено денну тему");
+    } else {
+        
+        document.body.classList.add('dark-theme');
+        console.log("Встановлено нічну тему");
     }
 }
-updateTheme();
+
+
+autoThemeSwitcher();
+const toggleBtn = document.getElementById('theme-toggle');
+
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    console.log("Користувач змінив тему вручну");
+});

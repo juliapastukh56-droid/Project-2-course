@@ -42,3 +42,19 @@ ul {
 li {
     margin-bottom: 10px;
 }
+/* Клас для нічної теми */
+body.dark-theme {
+    background-color: #1a1a2e !important; 
+    color: #e0e0e0 !important;           
+}
+
+
+body.dark-theme table {
+    background-color: #16213e !important;
+    color: white !important;
+    border-color: #0f3460;
+}
+
+body.dark-theme td[bgcolor="#F0F7FA"] {
+    background-color: #0f3460 !important;
+}
